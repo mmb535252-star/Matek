@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MATEK BILLIARDS | Luxury Timepieces</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;600&display=swap');
+        
+        :root {
+            --emerald-deep: #022c22;
+            --emerald-mid: #064e3b;
+            --gold: #fbbf24;
+            --light-green: #4ade80;
+        }
+
+        body { 
+            background-color: var(--emerald-deep); 
+            color: #ecfdf5; 
+            font-family: 'Inter', sans-serif; 
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, .brand-font { font-family: 'Playfair Display', serif; }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .gold-gradient {
+            background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .btn-luxury {
+            border: 1px solid var(--gold);
+            transition: all 0.4s ease;
+        }
+
+        .btn-luxury:hover {
+            background: var(--gold);
+            color: black;
+            box-shadow: 0 0 20px rgba(251, 191, 36, 0.4);
+        }
+
+        .page { display: none; }
+        .page-active { display: block; }
+    </style>
+</head>
+<body>
+
+    <nav class="fixed w-full z-50 glass py-4 px-8 flex justify-between items-center">
+        <div class="text-xl font-bold tracking-[0.2em] text-emerald-400 cursor-pointer" onclick="showPage('home')">MATEK BILLIARDS</div>
+        <div class="hidden md:flex space-x-8 text-xs uppercase tracking-widest">
+            <button onclick="showPage('home')" class="hover:text-gold transition">Home</button>
+            <button onclick="showPage('checkout')" class="hover:text-gold transition">Cart (<span id="cart-count">0</span>)</button>
+            <button onclick="showPage('creator')" class="text-gold border border-gold px-3 py-1 rounded">Creator Access</button>
+        </div>
+    </nav>
+
+    <main id="home" class="page page-active pt-32">
+        <section class="text-center px-4 py-20">
+            <h1 class="text-6xl md:text-8xl mb-6 gold-gradient">Precision in Green.</h1>
+            <p class="text-emerald-300 text-lg mb-10 max-w-xl mx-auto opacity-80">Where the strategy of billiards meets the mastery of Swiss-inspired horology.</p>
+            <button class="btn-luxury px-12 py-4 uppercase tracking-widest text-sm font-bold">View Collection</button>
+        </section>
+
+        <section class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 px-6 pb-20">
+            <div class="glass p-8 rounded-3xl relative overflow-hidden group">
+                <div class="h-64 bg-emerald-900 rounded-2xl mb-6 transition-transform group-hover:scale-105"></div>
+                <h3 class="text-2xl font-serif mb-2">The Emerald Cue Automatic</h3>
+                <p class="text-emerald-400 font-mono mb-4">$4,500.00</p>
+                <button onclick="updateCart(1)" class="w-full bg-emerald-500 text-black py-3 rounded-lg font-bold hover:bg-light-green transition">Add to Collection</button>
+            </div>
+            <div class="glass p-8 rounded-3xl relative overflow-hidden group">
+                <div class="h-64 bg-emerald-800 rounded-2xl mb-6 transition-transform group-hover:scale-105"></div>
+                <h3 class="text-2xl font-serif mb-2">Midnight Felt Chronograph</h3>
+                <p class="text-emerald-400 font-mono mb-4">$3,200.00</p>
+                <button onclick="updateCart(1)" class="w-full bg-emerald-500 text-black py-3 rounded-lg font-bold hover:bg-light-green transition">Add to Collection</button>
+            </div>
+        </section>
+    </main>
+
+    <main id="creator" class="page pt-32 px-6">
+        <div class="max-w-4xl mx-auto glass p-10 rounded-3xl">
+            <h2 class="text-3xl font-serif mb-8 text-yellow-500">Creator Studio</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <form class="space-y-4">
+                    <p class="text-xs uppercase text-emerald-500 mb-4 tracking-widest">Add New Watch Piece</p>
+                    <input type="text" placeholder="Watch Name" class="w-full bg-black/30 border border-emerald-900 p-3 rounded">
+                    <input type="number" placeholder="Price (USD)" class="w-full bg-black/30 border border-emerald-900 p-3 rounded">
+                    <textarea placeholder="Description" class="w-full bg-black/30 border border-emerald-900 p-3 rounded h-24"></textarea>
+                    <button type="button" class="w-full bg-yellow-600 text-black py-3 rounded font-bold uppercase text-xs tracking-widest">Publish Piece</button>
+                </form>
+                <div class="border-l border-emerald-900 pl-10">
+                    <p class="text-xs uppercase text-emerald-500 mb-4 tracking-widest">Live Inventory</p>
+                    <div class="space-y-4 text-sm">
+                        <div class="flex justify-between border-b border-emerald-900 pb-2">
+                            <span>Emerald Heritage</span>
+                            <span class="text-yellow-500">$4,500</span>
+                        </div>
+                        <div class="flex justify-between border-b border-emerald-900 pb-2">
+                            <span>Velvet Series</span>
+                            <span class="text-yellow-500">$2,800</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <main id="checkout" class="page pt-32 px-6 pb-20">
+        <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div class="space-y-8">
+                <h2 class="text-2xl font-serif text-yellow-500">Secure Checkout</h2>
+                <input type="email" placeholder="Email for Digital Receipt" class="w-full bg-black/20 border border-emerald-800 p-4 rounded-lg">
+                <div class="flex gap-4">
+                    <button class="flex-1 bg-white text-black py-4 rounded-xl font-bold flex items-center justify-center gap-2">Apple Pay</button>
+                    <button class="flex-1 bg-white text-black py-4 rounded-xl font-bold flex items-center justify-center gap-2">G-Pay</button>
+                </div>
+                <div class="space-y-4 pt-4 border-t border-emerald-900">
+                    <input type="text" placeholder="Card Number" class="w-full bg-black/20 border border-emerald-800 p-4 rounded-lg">
+                    <div class="flex gap-4">
+                        <input type="text" placeholder="MM/YY" class="flex-1 bg-black/20 border border-emerald-800 p-4 rounded-lg">
+                        <input type="text" placeholder="CVC" class="flex-1 bg-black/20 border border-emerald-800 p-4 rounded-lg">
+                    </div>
+                </div>
+                <button onclick="showPage('success')" class="w-full bg-yellow-600 py-5 rounded-full text-black font-bold uppercase tracking-widest">Complete Purchase</button>
+            </div>
+            <div class="glass p-8 rounded-3xl h-fit">
+                <h3 class="text-lg font-serif mb-6">Order Summary</h3>
+                <div class="flex justify-between mb-2"><span>Subtotal</span><span>$4,500.00</span></div>
+                <div class="flex justify-between mb-4"><span class="text-emerald-400">Insured Shipping</span><span>Free</span></div>
+                <div class="border-t border-emerald-900 pt-4 flex justify-between text-xl font-bold text-yellow-500">
+                    <span>Total</span><span>$4,500.00</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <main id="success" class="page pt-40 px-6 text-center">
+        <div class="max-w-xl mx-auto glass p-16 rounded-[3rem] border-yellow-600/30">
+            <div class="w-20 h-20 border-2 border-yellow-600 rounded-full flex items-center justify-center mx-auto mb-8">
+                <span class="text-yellow-500 text-3xl">✓</span>
+            </div>
+            <h2 class="text-5xl font-serif mb-4 gold-gradient">Excellence Secured.</h2>
+            <p class="text-emerald-200 mb-8 italic">Your MATEK BILLIARDS timepiece is now being authenticated for shipment.</p>
+            <div class="text-xs uppercase tracking-widest opacity-40 mb-10">Order #MB-2026-X99</div>
+            <button onclick="showPage('home')" class="btn-luxury px-10 py-3 rounded-full text-sm font-bold">Return to Store</button>
+        </div>
+    </main>
+
+    <script>
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('page-active'));
+            document.getElementById(pageId).classList.add('page-active');
+            window.scrollTo(0,0);
+        }
+
+        let cartCount = 0;
+        function updateCart(amt) {
+            cartCount += amt;
+            document.getElementById('cart-count').innerText = cartCount;
+            alert("Added to your collection.");
+        }
+    </script>
+</body>
+      </html>
+      
